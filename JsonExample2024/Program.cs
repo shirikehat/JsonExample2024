@@ -87,13 +87,39 @@ Final Grade:{sub.FinalGrade}");
 Final Grade:{sub.FinalGrade}");
             }
         }
+
+
+
+        public static void Print(string monkeys)
+        {
+            MonkeyList lst= new MonkeyList();
+            List<Monkey> m= JsonSerializer.Deserialize<List<Monkey>>(monkeys);
+            lst.Monkeys = m;
+        }
+
+
+
+
+
+
+        public static void ToJson(Monkey m)
+        {
+            string json= JsonSerializer.Serialize(m);
+            Print(json);
+        }
+
+
+
+
         static void Main(string[] args)
         {
            
             Student student = new Student() { BirthDate = new DateTime(2005, 12, 21), Id=1, Name = "Kuku Kaka" };
             student.Subjects.Add(new Subject() { Id = 1, Name = "History", FinalGrade = 100 });
 
-           string jsonStr1= BasicSerializtionExmaple(student);
+            
+
+            string jsonStr1= BasicSerializtionExmaple(student);
             Console.WriteLine("---------------------");
            
             string jsonStr2=SerializeWithOptions(student);
@@ -117,8 +143,11 @@ Final Grade:{sub.FinalGrade}");
             Console.WriteLine("---------------------");
             DeserializationWithPropertyNaming(jsonStr2);
 
-        
-           
+
+            string text = File.ReadAllText(@"../../../monkeydata.json");
+            
+
+
         }
 
     
